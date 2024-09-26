@@ -9,7 +9,7 @@ const shadowCss = css`
 export const GraphStyledContainer = styled.div<{ shadow?: boolean, borderRadius?: number }>`
   width: 100%;
   height: 100%;
-  padding: 15px 0 0;
+  padding: 20px 10px 0;
   border-radius: ${props => `${props.borderRadius}px`};
   ${props => props?.shadow && shadowCss}
 `

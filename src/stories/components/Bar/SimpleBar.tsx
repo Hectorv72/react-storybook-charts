@@ -4,8 +4,11 @@ import GraphContainer from '../../../components/GraphContainer';
 
 interface SimpleBarProps {
   shadow?: boolean;
-  chartName?: string;
-  borderRadius?: number
+  borderRadius?: number;
+  dataset?: any[];
+  dimension?: string;
+  metric?: string;
+  title?: string;
 }
 
 const SimpleBar: React.FC<SimpleBarProps> = (props) => {
@@ -13,10 +16,8 @@ const SimpleBar: React.FC<SimpleBarProps> = (props) => {
 
   return (
     <>
-      <div style={{ width: 500, height: 300, }}>
+      <div style={{ width: 500, height: 500, }}>
         <GraphContainer echart={{
-          key: chartRef.current?.id,
-          title: { text: props.chartName },
           renderer: 'canvas',
           legend: {},
           tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
@@ -27,19 +28,17 @@ const SimpleBar: React.FC<SimpleBarProps> = (props) => {
             containLabel: true
           },
           dataset: {
-            dimensions: Object.keys(indicadores_tasas[0]),
-            source: indicadores_tasas.sort((a, b) => a.AÑO - b.AÑO),
+            dimensions: [props.dimension, props.metric],
+            source: props.dataset,
           },
           xAxis: {
             type: 'category'
           },
           yAxis: {},
           series: [
-            { type: 'bar' },
-            { type: 'bar' },
-            { type: 'bar' },
+            { type: 'bar' }
           ]
-        }} borderRadius={props.borderRadius} shadow={props.shadow} />
+        }} borderRadius={props.borderRadius} shadow={props.shadow} title={props.title} />
       </div>
     </>
   )
